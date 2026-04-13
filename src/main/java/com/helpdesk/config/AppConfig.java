@@ -37,6 +37,11 @@ public final class AppConfig {
             return propertyValue.trim();
         }
 
+        String railwayValue = resolveRailwayMysqlValue(key);
+        if (railwayValue != null && !railwayValue.isBlank()) {
+            return railwayValue.trim();
+        }
+
         return propertyValue;
     }
 
@@ -146,5 +151,66 @@ public final class AppConfig {
         }
 
         return builder.toString();
+    }
+
+    private static String resolveRailwayMysqlValue(String key) {
+        if ("db.url".equalsIgnoreCase(key)) {
+            String url = firstNonBlank(
+                    System.getenv("DB_URL"),
+                    DOT_ENV.getProperty("DB_URL"),
+                    System.getenv("MYSQL_URL"),
+                    DOT_ENV.getProperty("MYSQL_URL"));
+            if (url != null && !url.isBlank()) {
+                return normalizeJdbcUrl(url.trim());
+            }
+
+            String host = firstNonBlank(System.getenv("MYSQLHOST"), DOT_ENV.getProperty("MYSQLHOST"));
+            String port = firstNonBlank(System.getenv("MYSQLPORT"), DOT_ENV.getProperty("MYSQLPORT"));
+            String database = firstNonBlank(System.getenv("MYSQLDATABASE"), DOT_ENV.getProperty("MYSQLDATABASE"));
+            if (host != null && port != null && database != null) {
+                return "jdbc:mysql://" + host.trim() + ":" + port.trim() + "/" + database.trim()
+                        + "?useSSL=false&allowPublicKeyRetrieval=true&serverTimezone=UTC";
+            }
+        }
+
+        if ("db.username".equalsIgnoreCase(key)) {
+            return firstNonBlank(
+                    System.getenv("DB_USERNAME"),
+                    DOT_ENV.getProperty("DB_USERNAME"),
+                    System.getenv("MYSQLUSER"),
+                    DOT_ENV.getProperty("MYSQLUSER"));
+        }
+
+        if ("db.password".equalsIgnoreCase(key)) {
+            return firstNonBlank(
+                    System.getenv("DB_PASSWORD"),
+                    DOT_ENV.getProperty("DB_PASSWORD"),
+                    System.getenv("MYSQLPASSWORD"),
+                    DOT_ENV.getProperty("MYSQLPASSWORD"));
+        }
+
+        return null;
+    }
+
+    private static String normalizeJdbcUrl(String url) {
+        if (url.startsWith("jdbc:mysql:")) {
+            return url;
+        }
+        if (url.startsWith("mysql://")) {
+            return "jdbc:" + url;
+        }
+        return url;
+    }
+
+    private static String firstNonBlank(String... values) {
+        if (values == null) {
+            return null;
+        }
+        for (String value : values) {
+            if (value != null && !value.isBlank()) {
+                return value;
+            }
+        }
+        return null;
     }
 }
