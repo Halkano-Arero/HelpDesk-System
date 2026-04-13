@@ -9,8 +9,11 @@ RUN mvn -DskipTests package
 FROM tomcat:9.0-jdk17-temurin
 
 RUN rm -rf /usr/local/tomcat/webapps/*
-COPY --from=build /build/target/helpdesk.war /usr/local/tomcat/webapps/ROOT.war
-COPY --from=build /build/target/helpdesk.war /usr/local/tomcat/webapps/helpdesk.war
+COPY --from=build /build/target/helpdesk.war /tmp/helpdesk.war
+RUN mkdir -p /usr/local/tomcat/webapps/ROOT \
+    && cd /usr/local/tomcat/webapps/ROOT \
+    && jar -xf /tmp/helpdesk.war \
+    && rm -f /tmp/helpdesk.war
 COPY docker/wait-and-run.sh /usr/local/bin/wait-and-run.sh
 RUN chmod +x /usr/local/bin/wait-and-run.sh
 
