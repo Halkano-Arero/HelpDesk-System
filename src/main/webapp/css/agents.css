@@ -1,0 +1,85 @@
+/* Add Agent Button */
+.add-agent-btn {
+    display: inline-block;
+    background-color: #28a745;     
+    color: white;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 15px;
+    font-weight: 600;
+    text-decoration: none;
+    cursor: pointer;
+    transition: 0.3s ease;
+    border: none;
+}
+
+.add-agent-btn i {
+    margin-right: 6px;
+}
+
+/* Hover effect */
+.add-agent-btn:hover {
+    background-color: #218838;      
+    transform: translateY(-2px);
+    box-shadow: 0 3px 8px rgba(0,0,0,0.15);
+}
+
+/* Active click effect */
+.add-agent-btn:active {
+    transform: scale(0.97);
+}
+
+.delete-btn {
+    background: #dc3545;
+    color: white;
+    padding: 6px 12px;
+    border-radius: 5px;
+    text-decoration: none;
+    cursor: pointer;  
+}
+
+.delete-btn:hover {
+    background: #c82333;
+}
+
+.agent-quick-form {
+    display: grid;
+    gap: 12px;
+}
+
+.agent-quick-form label {
+    font-weight: 600;
+    color: #17324d;
+}
+
+.agent-quick-form input,
+.agent-quick-form select {
+    width: 100%;
+    padding: 10px 12px;
+    border-radius: 10px;
+    border: 1px solid #d8e0ea;
+}
+
+.inline-category-form {
+    display: flex;
+    gap: 8px;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.inline-category-form select {
+    min-width: 150px;
+    padding: 8px 10px;
+    border-radius: 8px;
+    border: 1px solid #d8e0ea;
+}
+
+.save-btn {
+    background: #1b6ca8;
+    color: #fff;
+    border: none;
+    padding: 8px 12px;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 600;
+}

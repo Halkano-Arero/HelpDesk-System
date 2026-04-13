@@ -1,0 +1,73 @@
+.settings-container {
+    display: flex;
+    justify-content: space-between;
+    gap: 15px;
+    margin-top: 20px;
+}
+
+.settings-card {
+    width: 32%;
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0,0,0,.1);
+}
+
+.settings-card h3 {
+    margin-bottom: 10px;
+}
+
+.settings-card form {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 15px;
+}
+
+.settings-card input {
+    flex: 1;
+    padding: 8px;
+}
+
+.btn-add {
+    background: #28a745;
+    color: #fff;
+    border: none;
+    padding: 8px 14px;
+    cursor: pointer;
+    border-radius: 4px;
+}
+
+.btn-add:hover {
+    background: #218838;
+}
+
+.btn-delete {
+    background: #dc3545;
+    color: white;
+    padding: 5px 10px;
+    border-radius: 4px;
+    text-decoration: none;
+}
+
+.btn-delete:hover {
+    background: #c82333;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+}
+
+th, td {
+    padding: 6px;
+    text-align: left;
+}
+
+.alert-success {
+    background: #28a745;
+    color: #fff;
+    padding: 10px;
+    width: fit-content;
+    margin-bottom: 15px;
+    border-radius: 5px;
+}
